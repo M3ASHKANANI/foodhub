@@ -4,12 +4,15 @@
 	<title></title>
 </head>
 <body>
-	{% for x in XYZ %}
+	{% for x in Restaurant %}
+	<a href="{% url 'rest_detail' rest_id=x.id %}">
 	<ul>
-		<li>Restaurant name : {{x.restaurants}} </li>
-		<li>menu : {{x.menu}} </li>
-		<li>price_range : {{x.price_range}} </li>
+		<li>Restaurant name : {{x.name}}</li>
+		<li>Description : {{x.description}}</li>
+		<li>Opening Time : {{x.opening_time}}</li>
+		<li>Closeing Time : {{x.closing_time}}</li>
 	</ul>
+	</a>
 	{% endfor %}
 </body>
 </html>

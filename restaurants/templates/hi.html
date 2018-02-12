@@ -4,9 +4,13 @@
 	<title></title>
 </head>
 <body>
-	<h1>{{title}}</h1>
-	<p> {{content}} </p>
-	<p>last updated on:</p>{{updated}}
-	<p>Created on:</p>{{created}}
+			<li>Restaurant name : {{Restaurant.name}}</li>
+		<li>Description : {{Restaurant.description}}</li>
+		<li>Opening Time : {{Restaurant.opening_time}}</li>
+		<li>Closeing Time : {{Restaurant.closing_time}}</li>
+		<a href="{% url 'rest_list' %}">
+			<li>Back to Restaurant list</li>
+		</a>
+
 </body>
 </html>
