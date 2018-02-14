@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block form %}
+
+	<form action="{% url 'restaurant_update' rest_id=rest_obj.id %}" method='POST'>
+		{% csrf_token %}
+		{{update_form.as_p}}
+		<input type="submit" name="Update me!">
+
+{% endblock form %}

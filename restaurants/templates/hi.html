@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block form %}
+
 			<li>Restaurant name : {{Restaurant.name}}</li>
 		<li>Description : {{Restaurant.description}}</li>
 		<li>Opening Time : {{Restaurant.opening_time}}</li>
@@ -12,5 +10,4 @@
 			<li>Back to Restaurant list</li>
 		</a>
 
-</body>
-</html>
+{% endblock form %}

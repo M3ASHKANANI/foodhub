@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Restaurant
+from .forms import RestaurantForm
 
 def detail(request, rest_id):
 	context = {
@@ -13,6 +14,41 @@ def list(request):
 
 	}
 	return render(request, "Rest.html" , context)
+
+def create(request):
+	form = RestaurantForm()
+	if request.method == "POST":
+		form = RestaurantForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect("rest_list")
+	context = {
+		"create_form":form,
+	}
+	return render(request, "restaurant_create.html", context)
+
+
+def update(request , rest_id):
+	rest_obj = Restaurant.objects.get(id=rest_id)
+	form = RestaurantForm(instance=rest_obj)
+	if request.method == "POST":
+		form = RestaurantForm(request.POST , instance=rest_obj)
+		if form.is_valid():
+			form.save()
+			return redirect("rest_detail", rest_id=rest_obj.id)
+	context = {
+		"update_form":form,
+		"rest_obj":rest_obj,
+
+	}
+	return render(request, "restaurant_update.html", context)
+
+def delete(request, rest_id):
+	rest.objects.get(id=rest_id).delete()
+	return redirect("rest_list")
+
+
+
 
 
 

@@ -21,5 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("hi/<int:rest_id>/", views.detail , name="rest_detail"),
     path("restaurants/",views.list ,name="rest_list"),
-]
+    path("create/",views.create, name="restaurant_create"),
+    path("update/<int:rest_id>/", views.update, name="restaurant_update"),
+    path("delete/<int:rest_id>/", views.delete, name="restaurant_delete"),
 
+]
