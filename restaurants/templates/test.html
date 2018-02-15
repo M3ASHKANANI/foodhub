@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+	Restaurant Update
+
+{% endblock title %}
+
+
+
+{% block form %}
+
+	{% for x in Restaurant %}
+	<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{x.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Opening Time : {{x.opening_time}} Closeing Time : {{x.closing_time}} </h6>
+    <p class="card-text">{{x.description}}</p>
+    <a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}">Update</a></li></a>
+    <a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}">Update</a></li></a>
+  </div>
+</div>
+
+
+	<a href="{% url 'rest_detail' rest_id=x.id %}">
+	<ul>
+		<li>Restaurant name : {{x.name}}</li>
+		<li>Description : {{x.description}}</li>
+		<li>Opening Time : {{x.opening_time}}</li>
+		<li>Closeing Time : {{x.closing_time}}</li>
+		<li><a href="{% url 'restaurant_delete' rest_id=x.id %}">Delete</a></li>
+		<li><a href="{% url 'restaurant_update' rest_id=x.id %}">Update</a></li>
+	</ul>
+	</a>
+	{% endfor %}
+
+{% endblock form %}

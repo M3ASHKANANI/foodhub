@@ -1,12 +1,19 @@
 {% extends "base.html" %}
 
+
+{% block title %}
+Restaurant
+
+{% endblock title %}
+
+
 {% block form %}
 
 			<li>Restaurant name : {{Restaurant.name}}</li>
 		<li>Description : {{Restaurant.description}}</li>
 		<li>Opening Time : {{Restaurant.opening_time}}</li>
 		<li>Closeing Time : {{Restaurant.closing_time}}</li>
-		<a href="{% url 'rest_list' %}">
+		<a href="{% url 'rest_list' %}" class="btn btn-outline-dark">
 			<li>Back to Restaurant list</li>
 		</a>
 

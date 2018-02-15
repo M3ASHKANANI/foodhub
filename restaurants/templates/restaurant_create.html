@@ -1,11 +1,21 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
+{% block title %}
+ Create Restaurant
+
+{% endblock title %}
+
+
+
 {% block form %}
 
 
 	<form action="{% url 'restaurant_create' %}" method="POST">
 		{% csrf_token %}
-		{{create_form.as_p}}
-	<input type="submit" value="Create">
+
+		{{create_form|crispy}}
+	<input type="submit" value="Create" class="btn btn-outline-dark" >
 
 {% endblock form %}

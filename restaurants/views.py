@@ -44,7 +44,7 @@ def update(request , rest_id):
 	return render(request, "restaurant_update.html", context)
 
 def delete(request, rest_id):
-	rest.objects.get(id=rest_id).delete()
+	Restaurant.objects.get(id=rest_id).delete()
 	return redirect("rest_list")
 
 

@@ -1,18 +1,29 @@
 {% extends "base.html" %}
 
-{% block form %}
 
+{% block title %}
+
+	Restaurant Update
+
+{% endblock title %}
+
+
+
+{% block form %}
+<div class="row">
 	{% for x in Restaurant %}
-	<a href="{% url 'rest_detail' rest_id=x.id %}">
-	<ul>
-		<li>Restaurant name : {{x.name}}</li>
-		<li>Description : {{x.description}}</li>
-		<li>Opening Time : {{x.opening_time}}</li>
-		<li>Closeing Time : {{x.closing_time}}</li>
-		<li><a href="{% url 'restaurant_delete' rest_id=x.id %}">Delete</a></li>
-		<li><a href="{% url 'restaurant_update' rest_id=x.id %}">Update</a></li>
-	</ul>
-	</a>
+		<div class="col-lg-4 col-md-3">
+			<div class="card border-dark mb-3">
+			  <div class="card-body">
+			    <h5 class="card-title">{{x.name}}</h5>
+			    <h6 class="card-subtitle mb-2 text-muted">Opening Time : {{x.opening_time}} <br>Closeing Time : {{x.closing_time}} </h6>
+			    <p class="card-text">{{x.description}}</p>
+			    <a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}" class="btn btn-outline-dark">Update</a></li></a>
+			    <a href="{% url 'restaurant_delete' rest_id=x.id %}" class="btn btn-outline-dark">Delete</a></li>
+			  </div>
+			</div>
+		</div>
 	{% endfor %}
+</div>
 
 {% endblock form %}
