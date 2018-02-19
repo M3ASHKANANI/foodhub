@@ -12,7 +12,7 @@
 {% block form %}
 
 
-	<form action="{% url 'restaurant_create' %}" method="POST">
+	<form action="{% url 'restaurant_create' %}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
 
 		{{create_form|crispy}}

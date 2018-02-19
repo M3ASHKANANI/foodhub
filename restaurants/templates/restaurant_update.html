@@ -11,7 +11,7 @@ Update Your Information
 
 {% block form %}
 
-	<form action="{% url 'restaurant_update' rest_id=rest_obj.id %}" method='POST'>
+	<form action="{% url 'restaurant_update' rest_id=rest_obj.id %}" method='POST' >
 		{% csrf_token %}
 		{{update_form|crispy}}
 		<input type="submit" value="Update me!" name="Update me!" class="btn btn-outline-success">

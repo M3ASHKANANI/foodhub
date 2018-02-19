@@ -18,7 +18,7 @@ def list(request):
 def create(request):
 	form = RestaurantForm()
 	if request.method == "POST":
-		form = RestaurantForm(request.POST)
+		form = RestaurantForm(request.POST, request.FILES or None)
 		if form.is_valid():
 			form.save()
 			return redirect("rest_list")
@@ -32,7 +32,7 @@ def update(request , rest_id):
 	rest_obj = Restaurant.objects.get(id=rest_id)
 	form = RestaurantForm(instance=rest_obj)
 	if request.method == "POST":
-		form = RestaurantForm(request.POST , instance=rest_obj)
+		form = RestaurantForm(request.POST , request.FILES or None, instance=rest_obj)
 		if form.is_valid():
 			form.save()
 			return redirect("rest_detail", rest_id=rest_obj.id)
