@@ -27,7 +27,9 @@ urlpatterns = [
     path("create/",views.create, name="restaurant_create"),
     path("update/<int:rest_id>/", views.update, name="restaurant_update"),
     path("delete/<int:rest_id>/", views.delete, name="restaurant_delete"),
-
+    path("register/", views.register_user, name="register"),
+    path("login.", views.login_user, name="login"),
+    path("logout.", views.logout_user, name="logout"),
 
 ]
 
