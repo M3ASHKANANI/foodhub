@@ -30,6 +30,7 @@ urlpatterns = [
     path("register/", views.register_user, name="register"),
     path("login.", views.login_user, name="login"),
     path("logout.", views.logout_user, name="logout"),
+    path("create_item/<int:restid>/", views.create_item, name="create_item")
 
 ]
 

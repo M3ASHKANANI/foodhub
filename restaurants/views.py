@@ -3,9 +3,14 @@ from .models import Restaurant
 from .forms import RestaurantForm ,UserRegisterForm
 from django.contrib.auth import authenticate, login, logout
 
+
 def detail(request, rest_id):
+	restaurant_obj = Restaurant.objects.get(id=rest_id)
+	item = Item.objects.filter(restaurant=restaurant_obj)
 	context = {
-	"Restaurant": Restaurant.objects.get(id=rest_id)
+	"Restaurant": restaurant_obj,
+	"item": item,
+
 	}
 	return render(request, "hi.html", context)
 
@@ -32,6 +37,25 @@ def create(request):
 		"create_form":form,
 	}
 	return render(request, "restaurant_create.html", context)
+
+def create_item(request, rest_id):
+	rest_obj = Restaurant.objects.get(id=rest_id)
+	form = ItemForm()
+	if request.method == "POST":
+		form = ItemForm(request.POST, request.FILES or None)
+		if form.is_valid():
+			item = form.save(commit=False)
+			item.restaurant = restaurant_obj
+			item.save()
+			return redirect("list")
+	context = {
+	"form":form,
+	"rest_obj":rest_obj,
+
+	}
+	return render(request, "create_item", context)
+
+
 
 
 def update(request , rest_id):
@@ -85,7 +109,6 @@ def login_user(request):
 def logout_user(request):
 	logout(request)
 	return redirect("rest_list")
-
 
 
 

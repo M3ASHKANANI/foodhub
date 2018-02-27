@@ -15,6 +15,7 @@ class RestaurantForm(forms.ModelForm):
 	class Meta:
 		model = Restaurant
 		fields = "__all__"
+		excloud = "name"
 
 		widgets = {
 			"publish_date": forms.DateInput(attrs={"type":"data"})

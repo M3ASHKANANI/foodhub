@@ -13,13 +13,13 @@
 
 	{% for x in Restaurant %}
 	<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{x.name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Opening Time : {{x.opening_time}} Closeing Time : {{x.closing_time}} </h6>
-    <p class="card-text">{{x.description}}</p>
-    <a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}">Update</a></li></a>
-    <a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}">Update</a></li></a>
-  </div>
+  		<div class="card-body">
+    		<h5 class="card-title">{{x.name}}</h5>
+    		<h6 class="card-subtitle mb-2 text-muted">Opening Time : {{x.opening_time}} Closeing Time : {{x.closing_time}} </h6>
+    		<p class="card-text">{{x.description}}</p>
+    		<a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}">Update</a></li></a>
+    		<a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}">Update</a></li></a>
+  		</div>
 </div>
 
 
