@@ -26,6 +26,17 @@
 			    <h5 class="card-title">{{x.name}}</h5>
 			    <h6 class="card-subtitle mb-2 text-muted">Opening Time : {{x.opening_time}} <br>Closeing Time : {{x.closing_time}} </h6>
 			    <p class="card-text">{{x.description}}</p>
+
+					<button onClick="favorite({{x.id}})">
+
+						<i id="fav-color-{{x.id}}" class="fas fa-star text-warning"  ></i>
+						<span id="fav-number-{{x.id}}">0</span>
+
+					</button>
+
+
+					<br>
+					<br>
 			    <a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}" class="btn btn-outline-dark">Update</a></li></a>
 			    <a href="{% url 'restaurant_delete' rest_id=x.id %}" class="btn btn-outline-dark">Delete</a></li>
 			  </div>
@@ -34,4 +45,28 @@
 	{% endfor %}
 </div>
 
+
+<script>
+	function favorite(id){
+		console.log("test")
+	$.ajax({
+		type:"GET",
+		url:"/favorite/"+id,
+		error:function(){
+			console.log("naaah not today")
+		},
+		success:function(data){
+			console.log(data);
+			$("#fav-number-"+id).text(data.count);
+			if(data.action==="favorite"){
+				$("#fav-color-"+id).addClass("text-danger");
+			}
+			else{
+				$("#fav-color-"+id).removeClass("text-danger");
+			}
+
+		},
+	})
+	}
+</script>
 {% endblock form %}

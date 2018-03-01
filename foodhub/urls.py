@@ -30,8 +30,8 @@ urlpatterns = [
     path("register/", views.register_user, name="register"),
     path("login.", views.login_user, name="login"),
     path("logout.", views.logout_user, name="logout"),
-    path("create_item/<int:restid>/", views.create_item, name="create_item")
-
+    path("create_item/<int:rest_id>/", views.create_item, name="create_item"),
+    path("favorite/<int:rest_id>/", views.favorite, name="favorite"),
 ]
 
 if settings.DEBUG:

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Restaurant
+from django.http import JsonResponse
+from .models import Restaurant ,FavoriteRes
 from .forms import RestaurantForm ,UserRegisterForm
 from django.contrib.auth import authenticate, login, logout
 
@@ -110,8 +111,23 @@ def logout_user(request):
 	logout(request)
 	return redirect("rest_list")
 
+def favorite(request, rest_id):
+	restaurant_obj = Restaurant.objects.get(id=rest_id)
+	favorite_obj, created = FavoriteRes.objects.get_or_create(user=request.user, restaurant=restaurant_obj)
+	if created:
+		action="favorite"
+	else:
+		action="unfavorite"
+		favorite_obj.delete()
+	favorite_count = restaurant_obj.favoriteres_set.all().count()
+	# favorite_count = FavoriteRes.objects.filter(restaurant=restaurant_obj)
 
-
+	context = {
+	"action": action,
+	"count": favorite_count,
+	
+	}
+	return JsonResponse(context, safe=False)
 
 
 # def list(request):
