@@ -29,8 +29,8 @@
 
 					<button onClick="favorite({{x.id}})">
 
-						<i id="fav-color-{{x.id}}" class="fas fa-star text-warning"  ></i>
-						<span id="fav-number-{{x.id}}">0</span>
+						<i id="fav-color-{{x.id}}" class="fas fa-star  {% if x in my_fav %}text-warning{% endif %}"  ></i>
+						<span id="fav-number-{{x.id}}">{{x.favoriteres_set.count}}</span>
 
 					</button>
 
@@ -59,10 +59,10 @@
 			console.log(data);
 			$("#fav-number-"+id).text(data.count);
 			if(data.action==="favorite"){
-				$("#fav-color-"+id).addClass("text-danger");
+				$("#fav-color-"+id).addClass("text-warning");
 			}
 			else{
-				$("#fav-color-"+id).removeClass("text-danger");
+				$("#fav-color-"+id).removeClass("text-warning");
 			}
 
 		},

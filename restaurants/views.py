@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, Http404
 from .models import Restaurant ,FavoriteRes
-from .forms import RestaurantForm ,UserRegisterForm
+from .forms import RestaurantForm ,UserRegisterForm, LoginForm, ItemForm
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -16,18 +16,29 @@ def detail(request, rest_id):
 	return render(request, "hi.html", context)
 
 def list(request):
+	if not request.user.is_authenticated:
+		return redirect("login")
 	restaurant_list = Restaurant.objects.all()
 	restaurant_list = restaurant_list.order_by("name", "publish_date")
 	query = request.GET.get("q")
 	if query:
 		restaurant_list = restaurant_list.filter(name__contains=query)
+
+	fav_rest = []
+	favs = request.user.favoriteres_set.all()
+	for favorite in favs :
+		fav_rest.append(favorite.restaurant)
 	context = {
 	"Restaurant": restaurant_list,
+	"my_fav" : fav_rest,
+
 
 	}
 	return render(request, "Rest.html" , context)
 
 def create(request):
+	if not(request.user.is_authenticated):
+		return redirect("login")
 	form = RestaurantForm()
 	if request.method == "POST":
 		form = RestaurantForm(request.POST, request.FILES or None)
@@ -61,6 +72,8 @@ def create_item(request, rest_id):
 
 def update(request , rest_id):
 	rest_obj = Restaurant.objects.get(id=rest_id)
+	if not(request.user.is_staff or request.user==Restaurant.owner):
+		raise Http404
 	form = RestaurantForm(instance=rest_obj)
 	if request.method == "POST":
 		form = RestaurantForm(request.POST , request.FILES or None, instance=rest_obj)
@@ -75,7 +88,10 @@ def update(request , rest_id):
 	return render(request, "restaurant_update.html", context)
 
 def delete(request, rest_id):
+	if not(request.user.is_staff):
+		raise Http404
 	Restaurant.objects.get(id=rest_id).delete()
+
 	return redirect("rest_list")
 
 def register_user(request):
@@ -101,11 +117,15 @@ def login_user(request):
 		if form.is_valid():
 			username = request.POST["username"]
 			password = request.POST["password"]
-			user = authenticate(request, username=username, password=password)
-		if user is not None:
-			login(request, user)
-			return redirect("rest_list")
+			auth_user = authenticate(request, username=username, password=password)
+			if auth_user is not None:
+				login(request, auth_user)
+				return redirect("rest_list")
+	context = {
+		"form" : form,
 
+	}
+	return render(request, "login.html", context)
 
 def logout_user(request):
 	logout(request)

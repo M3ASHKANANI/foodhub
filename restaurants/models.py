@@ -8,6 +8,7 @@ class Restaurant(models.Model):
 	opening_time = models.TimeField(auto_now_add=True)
 	closing_time = models.TimeField(auto_now_add=True)
 	publish_date = models.DateField(null=True)
+	owner = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
 
 
 class Item(models.Model):
