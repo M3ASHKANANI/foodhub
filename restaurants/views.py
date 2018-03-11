@@ -72,14 +72,14 @@ def create_item(request, rest_id):
 
 def update(request , rest_id):
 	rest_obj = Restaurant.objects.get(id=rest_id)
-	if not(request.user.is_staff or request.user==Restaurant.owner):
+	if not(request.user.is_staff or request.user==rest_obj.owner):
 		raise Http404
 	form = RestaurantForm(instance=rest_obj)
 	if request.method == "POST":
 		form = RestaurantForm(request.POST , request.FILES or None, instance=rest_obj)
 		if form.is_valid():
 			form.save()
-			return redirect("rest_detail", rest_id=rest_obj.id)
+			return redirect("rest_list")
 	context = {
 		"update_form":form,
 		"rest_obj":rest_obj,
