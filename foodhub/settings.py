@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'uwmxo@cae%n=gtooiwgrb+wna$^jp0+k_)vg!x5z-=ch$((qcm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ["159.89.25.138","127.0.0.1"]
@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "restaurants",
     "crispy_forms",
+    'rest_framework',
+    "api",
+    
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

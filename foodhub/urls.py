@@ -19,6 +19,8 @@ from restaurants import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from api.views import RestaurantListAPIView, RestaurantDetailAPIView , RestaurantDeleteAPIView, RestaurantCreateAPIView, RestaurantUpdateAPIView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +34,11 @@ urlpatterns = [
     path("logout/", views.logout_user, name="logout"),
     path("create_item/<int:rest_id>/", views.create_item, name="create_item"),
     path("favorite/<int:rest_id>/", views.favorite, name="favorite"),
+    path("list/", RestaurantListAPIView.as_view()),
+    path("detail/<int:rest_id>/", RestaurantDetailAPIView.as_view()),
+    path("deleteit/<int:rest_id>/", RestaurantDeleteAPIView.as_view() ),
+    path("createit/", RestaurantCreateAPIView.as_view() ),
+    path("updateit/<int:rest_id>/", RestaurantUpdateAPIView.as_view() ),
 ]
 
 if settings.DEBUG:
