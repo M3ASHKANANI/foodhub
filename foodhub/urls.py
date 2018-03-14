@@ -19,8 +19,15 @@ from restaurants import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from api.views import RestaurantListAPIView, RestaurantDetailAPIView , RestaurantDeleteAPIView, RestaurantCreateAPIView, RestaurantUpdateAPIView
-
+from api.views import (RestaurantListAPIView,
+RestaurantDetailAPIView,
+RestaurantDeleteAPIView,
+RestaurantCreateAPIView,
+RestaurantUpdateAPIView,
+ItemCreateAPIView,
+ItemListAPIView,
+UserRegisterView
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,10 +42,14 @@ urlpatterns = [
     path("create_item/<int:rest_id>/", views.create_item, name="create_item"),
     path("favorite/<int:rest_id>/", views.favorite, name="favorite"),
     path("list/", RestaurantListAPIView.as_view()),
-    path("detail/<int:rest_id>/", RestaurantDetailAPIView.as_view()),
-    path("deleteit/<int:rest_id>/", RestaurantDeleteAPIView.as_view() ),
-    path("createit/", RestaurantCreateAPIView.as_view() ),
-    path("updateit/<int:rest_id>/", RestaurantUpdateAPIView.as_view() ),
+    path("detail/<int:rest_id>/", RestaurantDetailAPIView.as_view(), name="api-detail"),
+    path("deleteit/<int:rest_id>/", RestaurantDeleteAPIView.as_view(), name="api-delete" ),
+    path("createit/", RestaurantCreateAPIView.as_view(), ),
+    path("updateit/<int:rest_id>/", RestaurantUpdateAPIView.as_view(),name="api-update" ),
+
+    path("create/item/<int:rest_id>/", ItemCreateAPIView.as_view(),name="api-create-item"),
+    path("list/item/<int:rest_id>/", ItemListAPIView.as_view(), name="api-list-item"),
+    path("registerit/", UserRegisterView.as_view(), name="api-register"),
 ]
 
 if settings.DEBUG:
