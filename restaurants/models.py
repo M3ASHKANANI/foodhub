@@ -27,3 +27,4 @@ class FavoriteRes(models.Model):
 class FavoriteItem(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	item = models.ForeignKey(Item, on_delete=models.CASCADE)
+	

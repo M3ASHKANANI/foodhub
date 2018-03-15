@@ -23,9 +23,9 @@
 				 <img class="card-img-top" src="{{x.image.url}}" alt="Card image cap">
 				{% endif %}
 			  <div class="card-body">
-			    <h5 class="card-title">{{x.name}}</h5>
-			    <h6 class="card-subtitle mb-2 text-muted">Opening Time : {{x.opening_time}} <br>Closeing Time : {{x.closing_time}} </h6>
-			    <p class="card-text">{{x.description}}</p>
+				<h5 class="card-title">{{x.name}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">Opening Time : {{x.opening_time}} <br>Closeing Time : {{x.closing_time}} </h6>
+				<p class="card-text">{{x.description}}</p>
 
 					<button onClick="favorite({{x.id}})">
 
@@ -37,8 +37,8 @@
 
 					<br>
 					<br>
-			    <a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}" class="btn btn-outline-dark">Update</a></li></a>
-			    <a href="{% url 'restaurant_delete' rest_id=x.id %}" class="btn btn-outline-dark">Delete</a></li>
+				<a href="#" class="card-link"><a href="{% url 'restaurant_update' rest_id=x.id %}" class="btn btn-outline-dark">Update</a></li></a>
+				<a href="{% url 'restaurant_delete' rest_id=x.id %}" class="btn btn-outline-dark">Delete</a></li>
 			  </div>
 			</div>
 		</div>
